@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/csci4176-project.iml" filepath="$PROJECT_DIR$/.idea/csci4176-project.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/EyedropTracker.iml" filepath="$PROJECT_DIR$/.idea/modules/EyedropTracker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/EyedropTracker.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/EyedropTracker.app.iml" />
     </modules>
   </component>
 </project>
