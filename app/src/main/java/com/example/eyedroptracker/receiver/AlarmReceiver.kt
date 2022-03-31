@@ -11,41 +11,31 @@ import android.text.format.DateFormat
 import io.karn.notify.Notify
 
 // TODO: - Need to cite this https://www.youtube.com/watch?v=D0VpASTpgmw&ab_channel=FoodieDev
-//       - Also need to modify this more.
-//       - Add Comments.
 class AlarmReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
+        // Get the time of the exact alarm time.
         val timeInMillis = intent.getLongExtra(Constants.EXTRA_EXACT_ALARM_TIME, 0L)
-        when (intent.action) {
-            Constants.ACTION_SET_EXACT -> {
-                buildNotification(context, "Set Exact Time", convertDate(timeInMillis))
-            }
+        // TODO: - Get the Medication and the title and message we want to send from AlarmService.
 
-            Constants.ACTION_SET_REPETITIVE_EXACT -> {
-                setRepetitiveAlarm(AlarmService(context))
-                buildNotification(context, "Set Repetitive Exact Time", convertDate(timeInMillis))
+        // If we have an action.
+        when (intent.action) {
+            // The action is to set an exact time.
+            Constants.ACTION_SET_EXACT -> {
+                // Build our notification.
+                buildNotification(context, "Medication", "Blah Blah")
             }
         }
     }
 
-    // TODO: - This function needs to be rebuilt.
+    // Build a notification with our Notify plugin.
     private fun buildNotification(context: Context, title: String, message: String) {
+        // Call our notification.
         Notify
             .with(context)
             .content {
                 this.title = title
-                text = "Please take this medication - $message"
+                text = "Please take - $message"
             }
             .show()
     }
-
-    private fun setRepetitiveAlarm(alarmService: AlarmService) {
-        val cal = Calendar.getInstance().apply {
-            this.timeInMillis = timeInMillis + TimeUnit.DAYS.toMillis(7)
-        }
-        alarmService.setRepetitiveAlarm(cal.timeInMillis)
-    }
-
-    private fun convertDate(timeInMillis: Long): String =
-        DateFormat.format("dd/MM/yyyy hh:mm:ss", timeInMillis).toString()
 }

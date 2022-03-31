@@ -10,36 +10,27 @@ import com.example.eyedroptracker.utils.Constants
 import com.example.eyedroptracker.utils.RandomIntUtil
 
 // TODO: - Need to cite this https://www.youtube.com/watch?v=D0VpASTpgmw&ab_channel=FoodieDev
-//       - Also need to modify this more.
-//       - Add Comments.
 class AlarmService (private val context: Context) {
     private val alarmManager: AlarmManager? =
         context.getSystemService(Context.ALARM_SERVICE) as AlarmManager?
 
+    // Set the exact alarm in milliseconds.
     fun setExactAlarm(timeInMillis: Long) {
         setAlarm(
             timeInMillis,
             getPendingIntent(
                 getIntent().apply {
+                    // Set our action to exact time.
                     action = Constants.ACTION_SET_EXACT
+                    // The time in milliseconds we will execute our alarm.
+                    // TODO: - Send the time and title and message we wish to send.
                     putExtra(Constants.EXTRA_EXACT_ALARM_TIME, timeInMillis)
                 }
             )
         )
     }
 
-    fun setRepetitiveAlarm(timeInMillis: Long) {
-        setAlarm(
-            timeInMillis,
-            getPendingIntent(
-                getIntent().apply {
-                    action = Constants.ACTION_SET_REPETITIVE_EXACT
-                    putExtra(Constants.EXTRA_EXACT_ALARM_TIME, timeInMillis)
-                }
-            )
-        )
-    }
-
+    // Set the alarm with the time in milliseconds and our PendingIntent to be executed.
     private fun setAlarm(timeInMillis: Long, pendingIntent: PendingIntent) {
         alarmManager?.let {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -58,15 +49,18 @@ class AlarmService (private val context: Context) {
         }
     }
 
-    // TODO: - Need to cancel a notification using Alarm Manager.
+    // TODO: - Need a function to cancel notification.
 
+    // Get the Intent.
     private fun getIntent():Intent = Intent(context, AlarmReceiver::class.java)
 
+    // Get the pending Intent.
     private fun getPendingIntent(intent: Intent) =
+        // Send a pendingIntent to our AlarmReceiver.
         PendingIntent.getBroadcast(
             context,
             RandomIntUtil.getRandomInt(),
             intent,
-            PendingIntent.FLAG_UPDATE_CURRENT
+            PendingIntent.FLAG_IMMUTABLE
         )
 }
