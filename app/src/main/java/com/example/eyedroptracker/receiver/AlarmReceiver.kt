@@ -15,14 +15,19 @@ class AlarmReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         // Get the time of the exact alarm time.
         val timeInMillis = intent.getLongExtra(Constants.EXTRA_EXACT_ALARM_TIME, 0L)
-        // TODO: - Get the Medication and the title and message we want to send from AlarmService.
+
+        // Title for our Notification.
+        val title = intent.getStringExtra(Constants.EXTRA_TITLE).toString()
+
+        // Message for our Notification.
+        val message = intent.getStringExtra(Constants.EXTRA_MESSAGE).toString()
 
         // If we have an action.
         when (intent.action) {
             // The action is to set an exact time.
             Constants.ACTION_SET_EXACT -> {
                 // Build our notification.
-                buildNotification(context, "Medication", "Blah Blah")
+                buildNotification(context, title, message)
             }
         }
     }
@@ -34,7 +39,7 @@ class AlarmReceiver : BroadcastReceiver() {
             .with(context)
             .content {
                 this.title = title
-                text = "Please take - $message"
+                text = message
             }
             .show()
     }

@@ -8,6 +8,7 @@ import android.content.Intent
 import com.example.eyedroptracker.receiver.AlarmReceiver
 import com.example.eyedroptracker.utils.Constants
 import com.example.eyedroptracker.utils.RandomIntUtil
+import android.os.Bundle
 
 // TODO: - Need to cite this https://www.youtube.com/watch?v=D0VpASTpgmw&ab_channel=FoodieDev
 class AlarmService (private val context: Context) {
@@ -22,9 +23,10 @@ class AlarmService (private val context: Context) {
                 getIntent().apply {
                     // Set our action to exact time.
                     action = Constants.ACTION_SET_EXACT
-                    // The time in milliseconds we will execute our alarm.
-                    // TODO: - Send the time and title and message we wish to send.
+                    // Our notification information.
                     putExtra(Constants.EXTRA_EXACT_ALARM_TIME, timeInMillis)
+                    putExtra(Constants.EXTRA_TITLE, "This is a test Title")
+                    putExtra(Constants.EXTRA_MESSAGE, "This is a test Message")
                 }
             )
         )
