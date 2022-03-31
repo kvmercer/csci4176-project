@@ -10,7 +10,6 @@ import com.example.eyedroptracker.service.AlarmService
 import android.text.format.DateFormat
 import io.karn.notify.Notify
 
-// TODO: - Need to cite this https://www.youtube.com/watch?v=D0VpASTpgmw&ab_channel=FoodieDev
 class AlarmReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         // Get the time of the exact alarm time.

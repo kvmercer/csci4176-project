@@ -10,26 +10,53 @@ import com.example.eyedroptracker.utils.Constants
 import com.example.eyedroptracker.utils.RandomIntUtil
 import android.os.Bundle
 
-// TODO: - Need to cite this https://www.youtube.com/watch?v=D0VpASTpgmw&ab_channel=FoodieDev
 class AlarmService (private val context: Context) {
     private val alarmManager: AlarmManager? =
         context.getSystemService(Context.ALARM_SERVICE) as AlarmManager?
 
-    // Set the exact alarm in milliseconds.
-    fun setExactAlarm(timeInMillis: Long) {
+    // Set an alarm that will execute a notification given:
+    // - Time in milliseconds the notification will be executed.
+    // - Title of the notification.
+    // - Message of the notification.
+    // - The request code so we can delete the notification later.
+    fun setExactAlarm(timeInMillis: Long, title: String, message: String, requestCode: Int) {
         setAlarm(
             timeInMillis,
             getPendingIntent(
                 getIntent().apply {
                     // Set our action to exact time.
                     action = Constants.ACTION_SET_EXACT
+
                     // Our notification information.
                     putExtra(Constants.EXTRA_EXACT_ALARM_TIME, timeInMillis)
-                    putExtra(Constants.EXTRA_TITLE, "This is a test Title")
-                    putExtra(Constants.EXTRA_MESSAGE, "This is a test Message")
-                }
+                    putExtra(Constants.EXTRA_TITLE, title)
+                    putExtra(Constants.EXTRA_MESSAGE, message)
+                },
+                requestCode
             )
         )
+    }
+
+    // Delete an alarm that will execute a notification given:
+    // - Time in milliseconds the notification will be executed.
+    // - Title of the notification.
+    // - Message of the notification.
+    // - The request code assigned.
+    fun cancelExactAlarm(timeInMillis: Long, title: String, message: String, requestCode: Int) {
+        // Recreate our pending intent.
+        var pendingIntent = getPendingIntent(
+            getIntent().apply {
+                // Set our action to exact time.
+                action = Constants.ACTION_SET_EXACT
+
+                // Our notification information.
+                putExtra(Constants.EXTRA_EXACT_ALARM_TIME, timeInMillis)
+                putExtra(Constants.EXTRA_TITLE, title)
+                putExtra(Constants.EXTRA_MESSAGE, message)
+            },
+            requestCode
+        )
+        alarmManager?.cancel(pendingIntent)
     }
 
     // Set the alarm with the time in milliseconds and our PendingIntent to be executed.
@@ -41,7 +68,8 @@ class AlarmService (private val context: Context) {
                     timeInMillis,
                     pendingIntent
                 )
-            } else {
+            }
+            else {
                 alarmManager.setExact(
                     AlarmManager.RTC_WAKEUP,
                     timeInMillis,
@@ -51,17 +79,35 @@ class AlarmService (private val context: Context) {
         }
     }
 
-    // TODO: - Need a function to cancel notification.
+    // Cancel alarm.
+    private fun cancelAlarm(timeInMillis: Long, pendingIntent: PendingIntent) {
+        alarmManager?.let {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                alarmManager.setExactAndAllowWhileIdle(
+                    AlarmManager.RTC_WAKEUP,
+                    timeInMillis,
+                    pendingIntent
+                )
+            }
+            else {
+                alarmManager.setExact(
+                    AlarmManager.RTC_WAKEUP,
+                    timeInMillis,
+                    pendingIntent
+                )
+            }
+        }
+    }
 
     // Get the Intent.
     private fun getIntent():Intent = Intent(context, AlarmReceiver::class.java)
 
     // Get the pending Intent.
-    private fun getPendingIntent(intent: Intent) =
+    private fun getPendingIntent(intent: Intent, requestCode: Int) =
         // Send a pendingIntent to our AlarmReceiver.
         PendingIntent.getBroadcast(
             context,
-            RandomIntUtil.getRandomInt(),
+            requestCode,
             intent,
             PendingIntent.FLAG_IMMUTABLE
         )
