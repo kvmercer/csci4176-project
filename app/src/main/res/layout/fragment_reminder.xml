@@ -8,11 +8,74 @@
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/third_fragment_label"
+        android:layout_marginLeft="35dp"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="65dp"
+        android:layout_marginLeft="35dp"
+        android:text="Add Dates"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/third_fragment_label"
-        android:textSize="30sp"
-        android:textAlignment="center"
-        android:textColor="@color/white"/>
+        android:padding="4dp"
+        tools:context=".MainActivity"
+        >
+
+        <TextView
+            android:id="@+id/dateView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="60dp"
+            android:textColor="@android:color/background_dark"
+            android:textStyle="bold" />
+        <CalendarView
+            android:id="@+id/calender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dateView"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="20dp">
+        </CalendarView>
+
+    </RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Time"
+        android:layout_marginTop="420dp"
+        android:layout_marginLeft="35dp"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Medication"
+        android:layout_marginTop="480dp"
+        android:layout_marginLeft="35dp"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
+    <Button
+        android:id="@+id/save_user"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="DONE"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="55dp"/>
+
 
 </FrameLayout>
