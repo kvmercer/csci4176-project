@@ -2,11 +2,12 @@ package com.example.eyedroptracker.dao
 
 import androidx.room.*
 import com.example.eyedroptracker.models.Medication
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface MedicationDao {
     @Query("SELECT * FROM medication")
-    suspend fun getAllMedications(): List<Medication>
+    fun getAllMedications(): Flow<List<Medication>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addMedication(medication: Medication)

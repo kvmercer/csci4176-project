@@ -18,7 +18,7 @@ class ReminderRepository(private val reminderDao: ReminderDao) {
     // off the main thread.
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    suspend fun insert(reminder: Reminder) {
+    suspend fun addReminder(reminder: Reminder) {
         reminderDao.addReminder(reminder)
     }
 }
