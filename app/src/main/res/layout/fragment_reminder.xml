@@ -4,13 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.ReminderFragment"
-    android:background="@color/blue">
+    android:background="@color/white">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"
+        android:text="@string/third_fragment_label"
         android:textSize="30sp"
         android:textAlignment="center"
         android:textColor="@color/white"/>
