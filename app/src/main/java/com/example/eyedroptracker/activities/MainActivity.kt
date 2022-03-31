@@ -1,22 +1,28 @@
 package com.example.eyedroptracker.activities
 
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.speech.RecognizerIntent
+import android.speech.SpeechRecognizer
+import android.speech.tts.TextToSpeech
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.viewpager2.widget.ViewPager2
 import com.example.eyedroptracker.R
 import com.example.eyedroptracker.adapters.TabPageAdapter
 import com.example.eyedroptracker.databinding.ActivityMainBinding
 import com.example.eyedroptracker.service.AlarmService
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_home.*
 
 import java.util.*
 
@@ -24,12 +30,16 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    lateinit var tts: TextToSpeech
+    private val RQ_SPEECH_REC = 102
+    private var temp = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
 //        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_main)
+        startinputflow()
 
 //        setSupportActionBar(binding.toolbar)
 
@@ -71,6 +81,92 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+
+    }
+    fun speakout(input : String){
+        tts = TextToSpeech(applicationContext,TextToSpeech.OnInitListener {
+            if(it == TextToSpeech.SUCCESS){
+                tts.language = Locale.getDefault()
+                tts.setSpeechRate(1.0f)
+                tts.speak(input,TextToSpeech.QUEUE_ADD,null)
+
+            }
+        })
+    }
+    //starting voice input output flow
+     fun startinputflow(){
+        //Shouting out if you can see the screen to turn off voice input output if user can see screen
+        speakout("Can you see the screen if yes click on yes else just listen and chill")
+        var bol = true
+        val snackbar = Snackbar
+            .make(constraintLayoutFragmentHome, "Can you see me ", Snackbar.LENGTH_LONG)
+            .setAction("YES") {
+                //closing the snackbar
+                bol = false
+            }
+        snackbar.setActionTextColor(Color.RED)
+        snackbar.show()
+        if(bol){
+            startvoiceflow()
+        }
+
+    }
+    //taking medicine input
+    fun takemedicineinput(){
+        val i = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
+        i.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+        i.putExtra(RecognizerIntent.EXTRA_LANGUAGE,Locale.getDefault())
+        while (true) {
+            speakout("Enter your medicine name")
+            startActivityForResult(i, RQ_SPEECH_REC)
+            speakout("is the  medicine you intended to type $temp dont worry if its not exact ")
+            startActivityForResult(i, RQ_SPEECH_REC)
+            if (temp == "no") {
+                //going again if not right
+            }
+            else{
+                //taking the rest of the input
+                var medicinename = temp
+                speakout("Enter dosage just speak the number")
+                startActivityForResult(i, RQ_SPEECH_REC)
+                var dosage = temp.toInt()
+                speakout("Enter custom description of your medicine")
+                startActivityForResult(i, RQ_SPEECH_REC)
+                var descr = temp
+                speakout("Do you want to add a reminder for this")
+                startActivityForResult(i, RQ_SPEECH_REC)
+                if(temp == "yes"){
+                    //function to set date reminder etc
+                }
+                break
+            }
+        }
+    }
+    //Handling voice input
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)  {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode == RQ_SPEECH_REC && resultCode == Activity.RESULT_OK){
+            val result = data?.getStringExtra((RecognizerIntent.EXTRA_RESULTS))
+            var tempinput = result?.get(0).toString()
+            temp = tempinput //storing the input in a temp private global variable
+        }
+    }
+    fun startvoiceflow(){
+        if(!SpeechRecognizer.isRecognitionAvailable(this)){
+            Toast.makeText(this,"Speech recognition is not available",Toast.LENGTH_LONG).show()
+        }
+        else{
+            val i = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
+            i.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+            i.putExtra(RecognizerIntent.EXTRA_LANGUAGE,Locale.getDefault())
+            takemedicineinput()
+            speakout("Do you want to add more medicine")
+            startActivityForResult(i, RQ_SPEECH_REC)
+            if(temp == "yes"){
+                takemedicineinput()
+            }
+
+        }
 
     }
 
