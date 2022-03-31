@@ -1,19 +1,19 @@
 package com.example.eyedroptracker.dao
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import com.example.eyedroptracker.models.User
 
 @Dao
 interface UserDao {
     @Query("SELECT * FROM user")
-    fun getAllUsers(): List<User>
+    suspend fun getAllUsers(): List<User>
 
-    @Insert
-    fun insertAll(vararg users: User)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun addUser(user: User)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAll(vararg users: User)
 
     @Delete
-    fun delete(user: User)
+    suspend fun delete(user: User)
 }
