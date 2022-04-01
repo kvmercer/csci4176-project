@@ -6,8 +6,11 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface MedicationDao {
-    @Query("SELECT * FROM medication")
+    @Query("SELECT * FROM medications")
     fun getAllMedications(): Flow<List<Medication>>
+
+    @Query("DELETE FROM medications")
+    suspend fun deleteAll()
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addMedication(medication: Medication)

@@ -29,36 +29,6 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-//        save_user.setOnClickListener {
-//            runBlocking {
-//                val tempUser = User("Asad", "Kothawala")
-//                context?.let {
-//                    AppDatabase(it).userDao().addUser(tempUser)
-//                }
-//            }
-//        }
-
-//        delete_user.setOnClickListener {
-//            runBlocking {
-//                val tempUser = User("Asad", "Kothawala")
-//                context?.let {
-//                    AppDatabase(it).userDao().delete(tempUser)
-//                }
-//            }
-//        }
-//
-//        show_user.setOnClickListener {
-//            runBlocking {
-//                context?.let {
-//                    val usersList = AppDatabase(it).userDao().getAllUsers()
-//                    if (usersList.isNotEmpty()) {
-//                        blank_text.text = usersList[0].firstName
-//                    } else {
-//                        blank_text.text = getString(R.string.hello_blank_fragment)
-//                    }
-//                }
-//            }
-//        }
     }
 
 

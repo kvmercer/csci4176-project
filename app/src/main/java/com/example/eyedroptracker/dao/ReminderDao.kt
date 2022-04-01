@@ -6,13 +6,14 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ReminderDao {
-    @Query("SELECT * FROM reminder")
+    @Query("SELECT * FROM reminders")
     suspend fun getAllReminders(): List<Reminder>
 
-    @Query("SELECT * FROM reminder ORDER BY time ASC")
+    @Query("SELECT * FROM reminders ORDER BY time ASC")
     fun getRemindersDefault(): Flow<List<Reminder>>
 
-    //TODO: update queries needed
+    @Query("DELETE FROM reminders")
+    suspend fun deleteAll()
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addReminder(reminder: Reminder)

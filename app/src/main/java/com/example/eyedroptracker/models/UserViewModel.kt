@@ -4,7 +4,7 @@ import androidx.lifecycle.*
 import com.example.eyedroptracker.repos.UserRepository
 import kotlinx.coroutines.launch
 
-class UserViewModel(private val repository: UserRepository) : ViewModel() {
+class UserViewModel (private val repository: UserRepository) : ViewModel() {
 
     // Using LiveData and caching what allWords returns has several benefits:
     // - We can put an observer on the data (instead of polling for changes) and only update the
@@ -18,14 +18,19 @@ class UserViewModel(private val repository: UserRepository) : ViewModel() {
     fun insert(user: User) = viewModelScope.launch {
         repository.addUser(user)
     }
-}
 
-class UserViewModelFactory(private val repository: UserRepository) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(UserViewModelFactory::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return UserViewModel(repository) as T
+    fun delete(user: User) = viewModelScope.launch {
+        repository.delete(user)
+    }
+
+    class UserViewModelFactory constructor(private val repository: UserRepository) : ViewModelProvider.Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(UserViewModel::class.java)) {
+                @Suppress("UNCHECKED_CAST")
+                return UserViewModel(repository) as T
+            }
+            throw IllegalArgumentException("Unknown ViewModel class")
         }
-        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
+

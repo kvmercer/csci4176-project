@@ -6,10 +6,6 @@ import kotlinx.coroutines.launch
 
 class ReminderViewModel(private val repository: ReminderRepository) : ViewModel() {
 
-    // Using LiveData and caching what allWords returns has several benefits:
-    // - We can put an observer on the data (instead of polling for changes) and only update the
-    //   the UI when the data actually changes.
-    // - Repository is completely separated from the UI through the ViewModel.
     val allReminders: LiveData<List<Reminder>> = repository.allReminders.asLiveData()
 
     /**
@@ -22,7 +18,7 @@ class ReminderViewModel(private val repository: ReminderRepository) : ViewModel(
 
 class ReminderViewModelFactory(private val repository: ReminderRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(ReminderViewModelFactory::class.java)) {
+        if (modelClass.isAssignableFrom(ReminderViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             return ReminderViewModel(repository) as T
         }
