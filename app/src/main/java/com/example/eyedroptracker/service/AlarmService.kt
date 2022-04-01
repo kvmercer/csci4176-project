@@ -3,12 +3,10 @@ package com.example.eyedroptracker.service
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
-import android.os.Build
 import android.content.Intent
+import android.os.Build
 import com.example.eyedroptracker.receiver.AlarmReceiver
 import com.example.eyedroptracker.utils.Constants
-import com.example.eyedroptracker.utils.RandomIntUtil
-import android.os.Bundle
 
 class AlarmService (private val context: Context) {
     private val alarmManager: AlarmManager? =

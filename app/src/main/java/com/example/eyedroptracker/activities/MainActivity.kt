@@ -1,19 +1,17 @@
 package com.example.eyedroptracker.activities
 
 import android.app.Activity
-import android.app.DatePickerDialog
-import android.app.TimePickerDialog
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
 import android.speech.tts.TextToSpeech
-import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.ui.AppBarConfiguration
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.viewpager2.widget.ViewPager2
 import com.example.eyedroptracker.R
 import com.example.eyedroptracker.adapters.TabPageAdapter
@@ -22,8 +20,6 @@ import com.example.eyedroptracker.service.AlarmService
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_home.*
-
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -39,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
 //        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_main)
-        startinputflow()
+
 
 //        setSupportActionBar(binding.toolbar)
 
@@ -53,6 +49,7 @@ class MainActivity : AppCompatActivity() {
 //            setAlarm { alarmService.setExactAlarm(it) }
 //        }
         setUpTabBar()
+        startinputflow()
     }
 
     private fun setUpTabBar() {
@@ -98,14 +95,13 @@ class MainActivity : AppCompatActivity() {
         //Shouting out if you can see the screen to turn off voice input output if user can see screen
         speakout("Can you see the screen if yes click on yes else just listen and chill")
         var bol = true
-        val snackbar = Snackbar
-            .make(constraintLayoutFragmentHome, "Can you see me ", Snackbar.LENGTH_LONG)
-            .setAction("YES") {
-                //closing the snackbar
-                bol = false
-            }
-        snackbar.setActionTextColor(Color.RED)
-        snackbar.show()
+        val snack = Snackbar.make(findViewById(R.id.constraintLayoutFragmentHome),"Can you see me",Snackbar.LENGTH_LONG)
+        snack.setAction("DISMISS", View.OnClickListener {
+            // executed when DISMISS is clicked
+            bol = false
+            snack.dismiss()
+        })
+        snack.show()
         if(bol){
             startvoiceflow()
         }
