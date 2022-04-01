@@ -61,17 +61,14 @@
         android:textSize="25sp"
         android:textStyle="bold"
         android:textColor="@color/black"/>
-    <TextView
-        android:layout_width="wrap_content"
+    <TimePicker
+        android:id="@+id/datePicker1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Medication"
-        android:layout_marginTop="480dp"
-        android:layout_marginLeft="35dp"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"/>
+        android:layout_marginTop="440dp"
+        android:timePickerMode="spinner"/>
     <Button
-        android:id="@+id/save_user"
+        android:id="@+id/save_reminder"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:text="DONE"

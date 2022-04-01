@@ -70,7 +70,8 @@
             android:layout_height="match_parent"
             android:layout_below="@id/dateView"
             android:layout_centerInParent="true"
-            android:layout_marginTop="20dp"></CalendarView>
+            android:layout_marginTop="20dp">
+        </CalendarView>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview"
