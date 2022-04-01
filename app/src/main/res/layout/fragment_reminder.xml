@@ -67,7 +67,7 @@
         android:layout_marginTop="440dp"
         android:timePickerMode="spinner"/>
     <Button
-        android:id="@+id/save_user"
+        android:id="@+id/save_reminder"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:text="DONE"
