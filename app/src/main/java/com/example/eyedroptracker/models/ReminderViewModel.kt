@@ -1,8 +1,7 @@
 package com.example.eyedroptracker.models
 
 import androidx.lifecycle.*
-import com.example.eyedroptracker.repos.MedicationRepository
-import com.example.eyedroptracker.repositories.ReminderRepository
+import com.example.eyedroptracker.repos.ReminderRepository
 import kotlinx.coroutines.launch
 
 class ReminderViewModel(private val repository: ReminderRepository) : ViewModel() {

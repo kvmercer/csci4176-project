@@ -1,4 +1,4 @@
-package com.example.eyedroptracker.repositories
+package com.example.eyedroptracker.repos
 
 import androidx.annotation.WorkerThread
 import com.example.eyedroptracker.dao.ReminderDao
