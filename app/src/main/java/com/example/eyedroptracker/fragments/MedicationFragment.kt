@@ -12,8 +12,10 @@ import androidx.lifecycle.lifecycleScope
 import com.example.eyedroptracker.EyedropTrackerApp
 import com.example.eyedroptracker.R
 import com.example.eyedroptracker.dao.UserDao
+import com.example.eyedroptracker.models.ReminderViewModel
 import com.example.eyedroptracker.models.User
 import com.example.eyedroptracker.models.UserViewModel
+import com.example.eyedroptracker.repos.ReminderRepository
 import com.example.eyedroptracker.repos.UserRepository
 import com.example.eyedroptracker.utils.AppDatabase
 import kotlinx.android.synthetic.main.fragment_medicine.*
@@ -73,6 +75,13 @@ class MedicationFragment : Fragment() {
 
                 }
             }
+        }
+
+        val reminderDao = AppDatabase.getDatabase(requireActivity().applicationContext, lifecycleScope).reminderDao()
+        val reminderRepository = ReminderRepository(reminderDao)
+
+        val reminderViewModel: ReminderViewModel by viewModels {
+            ReminderViewModel.ReminderViewModelFactory(reminderRepository)
         }
     }
 }

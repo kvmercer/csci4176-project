@@ -39,11 +39,11 @@ class MainActivity : AppCompatActivity() {
 //        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_main)
 
-//        val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
-//        val adapter = ReminderListAdapter()
-//        recyclerView.adapter = adapter
-//        recyclerView.layoutManager = LinearLayoutManager(this)
-//        setSupportActionBar(binding.toolbar)
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
+        val adapter = ReminderListAdapter()
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        //setSupportActionBar(binding.toolbar)
 
 //        val navController = findNavController(R.id.nav_host_fragment_content_main)
 //        appBarConfiguration = AppBarConfiguration(navController.graph)

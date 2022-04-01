@@ -14,14 +14,14 @@ class ReminderViewModel(private val repository: ReminderRepository) : ViewModel(
     fun insert(reminder: Reminder) = viewModelScope.launch {
         repository.addReminder(reminder)
     }
-}
-
-class ReminderViewModelFactory(private val repository: ReminderRepository) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(ReminderViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return ReminderViewModel(repository) as T
+    class ReminderViewModelFactory(private val repository: ReminderRepository) : ViewModelProvider.Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(ReminderViewModel::class.java)) {
+                @Suppress("UNCHECKED_CAST")
+                return ReminderViewModel(repository) as T
+            }
+            throw IllegalArgumentException("Unknown ViewModel class")
         }
-        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
+
