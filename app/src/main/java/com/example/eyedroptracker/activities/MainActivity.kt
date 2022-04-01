@@ -10,9 +10,12 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.eyedroptracker.R
 import com.example.eyedroptracker.adapters.TabPageAdapter
+import com.example.eyedroptracker.classes.ReminderListAdapter
 import com.example.eyedroptracker.databinding.ActivityMainBinding
 import com.example.eyedroptracker.service.AlarmService
 import com.google.android.material.tabs.TabLayout
@@ -31,6 +34,10 @@ class MainActivity : AppCompatActivity() {
 //        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_main)
 
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
+        val adapter = ReminderListAdapter()
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
 //        setSupportActionBar(binding.toolbar)
 
 //        val navController = findNavController(R.id.nav_host_fragment_content_main)
