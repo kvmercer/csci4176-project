@@ -3,16 +3,65 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.MedicationFragment"
     android:background="@color/white">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/second_fragment_label"
+            android:layout_marginLeft="35dp"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"/>
+<!--    <ListView xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--        xmlns:tools="http://schemas.android.com/tools"-->
+<!--        android:id="@+id/simpleListView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:divider="#f00"-->
+<!--        android:dividerHeight="1dp">-->
+<!--    </ListView>-->
+    <ListView
+        android:id="@+id/simpleListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/second_fragment_label"
-        android:textSize="30sp"
-        android:textAlignment="center"
-        android:textColor="@color/white"/>
+        android:layout_gravity="center">
+        <EditText
+            android:id="@+id/editText1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="300dp"
+            android:layout_marginLeft="50dp"
+            android:hint="Enter medicine name"
+            android:ems="9"
+            android:inputType="textPersonName" >
+        </EditText>
+        <Button
+            android:id="@+id/submitBtn"
+            android:text="Submit"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="300dp"
+            android:layout_height="45dp"
+            android:layout_toEndOf="@+id/editText1">
+        </Button>
+
+
+
+    </RelativeLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="60dp"
+            android:layout_gravity="bottom|center"
+            app:srcCompat="@android:drawable/ic_input_add"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
 </FrameLayout>

@@ -30,20 +30,20 @@ class ReminderFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        // This is to show to set an alarm.
-        val alarmService = AlarmService(requireContext())
-        fab.setOnClickListener{
-            setAlarm {
-                alarmService.setExactAlarm(it, "title", "message", 1)
-            }
-        }
-
-        // This is to show how you can delete an alarm.
-        fab2.setOnClickListener{
-            setAlarm {
-                alarmService.cancelExactAlarm(it, "title", "message", 1)
-            }
-        }
+//        // This is to show to set an alarm.
+//        val alarmService = AlarmService(requireContext())
+//        fab.setOnClickListener{
+//            setAlarm {
+//                alarmService.setExactAlarm(it, "title", "message", 1)
+//            }
+//        }
+//
+//        // This is to show how you can delete an alarm.
+//        fab2.setOnClickListener{
+//            setAlarm {
+//                alarmService.cancelExactAlarm(it, "title", "message", 1)
+//            }
+//        }
 
 
 
