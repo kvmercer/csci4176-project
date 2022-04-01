@@ -7,7 +7,6 @@ import android.os.Build
 import android.content.Intent
 import com.example.eyedroptracker.receiver.AlarmReceiver
 import com.example.eyedroptracker.utils.Constants
-import com.example.eyedroptracker.utils.RandomIntUtil
 import android.os.Bundle
 
 class AlarmService (private val context: Context) {
