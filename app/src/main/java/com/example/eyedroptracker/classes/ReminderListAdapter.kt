@@ -10,19 +10,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.eyedroptracker.R
 import com.example.eyedroptracker.models.Reminder
 
-class ReminderListAdapter : ListAdapter<Reminder, ReminderListAdapter.WordViewHolder>(WordsComparator()) {
+class ReminderListAdapter : ListAdapter<Reminder, ReminderListAdapter.ReminderViewHolder>(WordsComparator()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WordViewHolder {
-        return WordViewHolder.create(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReminderViewHolder {
+        return ReminderViewHolder.create(parent)
     }
 
-    override fun onBindViewHolder(holder: WordViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ReminderViewHolder, position: Int) {
         val current = getItem(position)
         //this may not be correct
         holder.bind(current.toString())
     }
 
-    class WordViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ReminderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val wordItemView: TextView = itemView.findViewById(R.id.textView)
 
         fun bind(text: String?) {
@@ -30,10 +30,10 @@ class ReminderListAdapter : ListAdapter<Reminder, ReminderListAdapter.WordViewHo
         }
 
         companion object {
-            fun create(parent: ViewGroup): WordViewHolder {
+            fun create(parent: ViewGroup): ReminderViewHolder {
                 val view: View = LayoutInflater.from(parent.context)
                     .inflate(R.layout.recyclerview_item, parent, false)
-                return WordViewHolder(view)
+                return ReminderViewHolder(view)
             }
         }
     }
