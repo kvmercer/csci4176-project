@@ -10,7 +10,7 @@
 
 **Resourced Used**
 
-For the notification system. The youtube tutorial down belows code was taken and then modified and re-arranged for our needs. Can be found in AlarmServiceAlarm.kt, AlarmReceiver.kt, ReminderFragment.kt, and Constants.kt.
+For the notification system. The youtube tutorial down below code was taken and then modified and re-arranged for our needs. Can be found in AlarmServiceAlarm.kt, AlarmReceiver.kt, ReminderFragment.kt, and Constants.kt.
 
 https://youtu.be/D0VpASTpgmw
 
