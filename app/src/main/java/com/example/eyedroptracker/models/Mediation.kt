@@ -6,7 +6,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.io.Serializable
 
-@Entity
+@Entity(tableName = "medications")
 data class Medication(@PrimaryKey(autoGenerate = true) @NonNull val mid: Int,
                       @ColumnInfo(name = "name") val Name: String?,
                       @ColumnInfo(name = "dosage") val Dosage: Int?,

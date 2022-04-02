@@ -6,7 +6,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.io.Serializable
 
-@Entity
+@Entity(tableName = "users")
 data class User(@PrimaryKey @NonNull @ColumnInfo(name="f_name") val firstName: String,
                 @ColumnInfo(name = "l_name") val lastName: String?
 ) : Serializable

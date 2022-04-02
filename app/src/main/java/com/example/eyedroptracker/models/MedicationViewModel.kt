@@ -6,10 +6,6 @@ import kotlinx.coroutines.launch
 
 class MedicationViewModel(private val repository: MedicationRepository) : ViewModel() {
 
-    // Using LiveData and caching what allWords returns has several benefits:
-    // - We can put an observer on the data (instead of polling for changes) and only update the
-    //   the UI when the data actually changes.
-    // - Repository is completely separated from the UI through the ViewModel.
     val allMedications: LiveData<List<Medication>> = repository.allMedications.asLiveData()
 
     /**
@@ -18,6 +14,7 @@ class MedicationViewModel(private val repository: MedicationRepository) : ViewMo
     fun insert(medication: Medication) = viewModelScope.launch {
         repository.addMedication(medication)
     }
+
 }
 
 class MedicationViewModelFactory(private val repository: MedicationRepository) : ViewModelProvider.Factory {

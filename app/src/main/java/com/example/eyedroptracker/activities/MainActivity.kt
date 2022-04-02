@@ -1,15 +1,11 @@
 package com.example.eyedroptracker.activities
 
-import android.app.DatePickerDialog
-import android.app.TimePickerDialog
+import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.viewpager2.widget.ViewPager2
 import com.example.eyedroptracker.R
 import com.example.eyedroptracker.adapters.TabPageAdapter
@@ -18,7 +14,6 @@ import com.example.eyedroptracker.service.AlarmService
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
 
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,11 +22,16 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
 //        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_main)
 
-//        setSupportActionBar(binding.toolbar)
+        // I commented this out.
+        // val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
+        // val adapter = ReminderListAdapter()
+        // recyclerView.adapter = adapter
+        // recyclerView.layoutManager = LinearLayoutManager(this)
+        //
+        //setSupportActionBar(binding.toolbar)
 
 //        val navController = findNavController(R.id.nav_host_fragment_content_main)
 //        appBarConfiguration = AppBarConfiguration(navController.graph)

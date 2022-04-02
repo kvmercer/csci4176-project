@@ -14,6 +14,10 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import java.util.*
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
+import com.example.eyedroptracker.service.AlarmService
 
 class HomeFragment : Fragment() {
 
@@ -27,6 +31,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
 
 //        save_user.setOnClickListener {
@@ -60,6 +65,7 @@ class HomeFragment : Fragment() {
 //            }
 //        }
     }
+
 
 
 }

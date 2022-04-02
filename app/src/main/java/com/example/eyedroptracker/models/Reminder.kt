@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 import java.io.Serializable
 import java.util.*
 
-@Entity
+@Entity(tableName = "reminders")
 data class Reminder(@PrimaryKey(autoGenerate = true) @NonNull val rid: Int,
                     @ColumnInfo(name = "date_range") val DateRange: Date?,
                     @Embedded val ReminderMed: Medication?,
