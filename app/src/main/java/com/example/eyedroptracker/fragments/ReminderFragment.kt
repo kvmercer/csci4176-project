@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.eyedroptracker.R
-import com.example.eyedroptracker.models.User
 import com.example.eyedroptracker.service.AlarmService
 import com.example.eyedroptracker.utils.AppDatabase
 import com.google.android.material.snackbar.Snackbar
@@ -24,6 +23,11 @@ import java.text.SimpleDateFormat
 import java.lang.String.format
 import android.text.format.DateFormat
 import android.widget.TimePicker
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import com.example.eyedroptracker.models.*
+import com.example.eyedroptracker.repos.ReminderRepository
+import com.example.eyedroptracker.repos.UserRepository
 import java.util.concurrent.atomic.AtomicInteger
 
 class ReminderFragment : Fragment() {
@@ -48,7 +52,6 @@ class ReminderFragment : Fragment() {
             // Get the time that was Input by the User.
             val timeInMilliseconds = getSetTimeInMilliseconds(calendar, timePicker)
 
-            // TODO: - This information needs to be saved in order to delete notifications.
             // Generate a Request Code.
             val seed = AtomicInteger()
             val requestCodeID = seed.getAndIncrement() + System.currentTimeMillis().toInt()
@@ -57,12 +60,27 @@ class ReminderFragment : Fragment() {
             // Set the alarm.
             alarmService.setExactAlarm(
                 timeInMilliseconds,
-                "Medication Reminder",
-                "Please take your medication.",
+                "Eyedroppers Reminder",
+                "Please take your eyedrops.",
                 requestCodeID)
 
+            // Save Reminder to the Database.
+            val reminderDao = AppDatabase.getDatabase(requireActivity().applicationContext, lifecycleScope).reminderDao()
+            val reminderRepositroy = ReminderRepository(reminderDao)
+
+            val reminderViewModel: ReminderViewModel by viewModels {
+                ReminderViewModel.ReminderViewModelFactory(reminderRepositroy)
+            }
+
+            val reminder = Reminder(requestCodeID,
+                Date(timeInMilliseconds),
+                Medication(requestCodeID, "Eyedrops", 9, "Blah BLah")
+                ,1,
+                Date(timeInMilliseconds))
+            reminderViewModel.insert(reminder)
+
             // Show that we set our reminder.
-            Snackbar.make(view,"Reminder has been set", Snackbar.LENGTH_SHORT)
+            Snackbar.make(view,"Reminder has been set for "+Date(timeInMilliseconds).toString(), Snackbar.LENGTH_SHORT)
                 .show();
         }
 
