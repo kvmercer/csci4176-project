@@ -15,3 +15,5 @@ https://youtu.be/D0VpASTpgmw
 
 Furthermore, the following third party library was used for our notification system:
 https://github.com/Karn/notify
+
+An android studio template "Basic Activity" was also used. 
