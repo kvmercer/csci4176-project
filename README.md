@@ -10,7 +10,7 @@
 
 **Resourced Used**
 
-For the alarm and notification system. The youtube tutorials code was taken and then modified for our needs:
+For the notification system. The youtube tutorials code was taken and then modified and re-arranged for our needs. Can be found in AlarmServiceAlarm.kt, AlarmReceiver.kt, ReminderFragment.kt, and Constants.kt:
 https://youtu.be/D0VpASTpgmw
 
 Furthermore, the following third party library was used for our notification system:
